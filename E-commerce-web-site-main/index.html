@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Discover amazing fashion products at halazStyle Store. Shop the latest trends in clothing, shoes, watches, and accessories with great deals and fast shipping."
+    />
+    <meta
+      name="keywords"
+      content="fashion, clothing, shoes, watches, accessories, online shopping, deals, halazStyle"
+    />
+    <meta name="author" content="halazStyle" />
+    <meta
+      property="og:title"
+      content="halazStyle Store - Your Fashion Destination"
+    />
+    <meta
+      property="og:description"
+      content="Shop the latest fashion trends with amazing deals at halazStyle Store."
+    />
+    <meta
+      property="og:image"
+      content="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1200&q=80"
+    />
+    <meta property="og:url" content="https://halazstyle.com" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>halazStyle Store</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <nav class="navbar">
+        <div class="nav-container">
+          <a href="#" class="logo">halazStyle</a>
+          <nav class="nav-menu">
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="products/productsAll.html">Products</a></li>
+            </ul>
+          </nav>
+          <div class="search-box">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search products..."
+            />
+            <button id="search-btn"><i class="fas fa-search"></i></button>
+          </div>
+          <div class="nav-icons">
+            <div class="cart-btn" id="cart-btn">
+              <i class="fas fa-shopping-cart"></i>
+              <span class="cart-count" id="cart-count">0</span>
+            </div>
+            <button class="menu-toggle" id="menu-toggle">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Cart Sidebar -->
+    <aside class="cart-sidebar" id="cart-sidebar">
+      <div class="cart-header">
+        <h2>Your Cart</h2>
+        <button class="close-cart" id="close-cart">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="cart-items" id="cart-items"></div>
+      <div class="cart-footer">
+        <p>Total: $<span id="cart-total">0.00</span></p>
+        <div class="cart-actions">
+          <button class="clear-cart" id="clear-cart">Clear</button>
+          <button class="checkout-btn">Checkout</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>
+          "Your one-stop shop for all categories – Fashion, Shoes, Watches
+          &more"
+        </h1>
+        <p>Discover the latest trends and get up to 30% off</p>
+        <button
+          class="cta-btn"
+          onclick="window.location.href='products/productsAll.html'"
+        >
+          Shop Now
+        </button>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products" id="products">
+      <div class="products-container">
+        <div class="category-sidebar">
+          <h3>Categories</h3>
+          <ul id="home-categories">
+            <li onclick="setHomeCategory('all')" class="active">
+              All Categories
+            </li>
+          </ul>
+          <h3>Sort By</h3>
+          <ul id="home-sort">
+            <li onclick="setHomeSort('default')" class="active">Default</li>
+            <li onclick="setHomeSort('price-low')">Price: Low to High</li>
+            <li onclick="setHomeSort('price-high')">Price: High to Low</li>
+            <li onclick="setHomeSort('rating')">Rating</li>
+            <li onclick="setHomeSort('newest')">Newest</li>
+          </ul>
+        </div>
+        <div class="products-content">
+          <h3 id="category-title">All Products</h3>
+          <div class="product-list" id="home-products"></div>
+          <div id="home-pagination" class="pagination"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Back to Top -->
+    <button id="scrollToTopBtn" class="scrollToTopBtn">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section">
+          <h3>StyleShop</h3>
+          <p>Your one-stop destination for all fashion needs.</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="products/productsAll.html">Products</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Info</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 123 Fashion Street</li>
+            <li><i class="fas fa-phone"></i> +1 234 567 890</li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Newsletter</h3>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Your Email" />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> StyleShop. All rights reserved.</p>
+      </div>
+    </footer>
+    <div id="search-popup" class="search-popup">
+      <div class="popup-content">
+        <span id="close-popup" class="close-btn">&times;</span>
+        <h3>Search Results</h3>
+        <div id="search-results"></div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Advanced Notifications -->
+    <div id="notification-popup" class="notification-popup">
+      <div class="notification-content">
+        <span id="close-notification" class="close-notification">&times;</span>
+        <h3>🎉 Special Offer!</h3>
+        <p>Get 20% off on all watches! Limited time offer.</p>
+        <button class="notification-btn">Shop Now</button>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>

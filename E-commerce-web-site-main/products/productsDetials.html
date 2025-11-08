@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Details - StyleShop</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <nav class="navbar">
+        <div class="nav-container">
+          <a href="../index.html" class="logo">halazStyle</a>
+
+          <div class="search-box">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search products..."
+            />
+            <button id="search-btn"><i class="fas fa-search"></i></button>
+          </div>
+
+          <div class="nav-icons">
+            <div class="cart-btn" id="cart-btn">
+              <i class="fas fa-shopping-cart"></i>
+              <span class="cart-count" id="cart-count">0</span>
+            </div>
+            <button class="menu-toggle" id="menu-toggle">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Cart Sidebar -->
+    <aside class="cart-sidebar" id="cart-sidebar">
+      <div class="cart-header">
+        <h2>Your Cart</h2>
+        <button class="close-cart" id="close-cart">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="cart-items" id="cart-items"></div>
+      <div class="cart-footer">
+        <p>Total: $<span id="cart-total">0.00</span></p>
+        <div class="cart-actions">
+          <button class="clear-cart" id="clear-cart">Clear</button>
+          <button class="checkout-btn">Checkout</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="product-detail-main">
+      <div id="product-detail"></div>
+
+      <!-- Reviews Section -->
+      <section class="reviews-section">
+        <h2>Customer Reviews</h2>
+        <div id="reviews-container" class="reviews-grid"></div>
+      </section>
+
+      <!-- Recommended Products -->
+      <section class="recommended-section">
+        <h2>You Might Also Like</h2>
+        <div id="recommended-products" class="recommended-grid"></div>
+      </section>
+    </main>
+
+    <!-- Back to Top -->
+    <button id="scrollToTopBtn" class="scrollToTopBtn">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section">
+          <h3>StyleShop</h3>
+          <p>Your one-stop destination for all fashion needs.</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="productsAll.html">Products</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contact Info</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 123 Fashion Street</li>
+            <li><i class="fas fa-phone"></i> +1 234 567 890</li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Newsletter</h3>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Your Email" />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> StyleShop. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Search Popup -->
+    <div id="search-popup" class="search-popup">
+      <div class="popup-content">
+        <span id="close-popup" class="close-btn">&times;</span>
+        <h3>Search Results</h3>
+        <div id="search-results"></div>
+      </div>
+    </div>
+
+    <script src="../main.js"></script>
+    <script>
+      // 1️⃣ جلب معرف المنتج من الرابط
+      const params = new URLSearchParams(window.location.search);
+      const productId = params.get("id");
+
+      const productDetail = document.getElementById("product-detail");
+
+      // 2️⃣ جلب بيانات المنتج من API
+      async function fetchProductDetail(id) {
+        try {
+          const res = await fetch(`https://dummyjson.com/products/${id}`);
+          const product = await res.json();
+
+          productDetail.innerHTML = `
+      <div class="product-detail">
+        <div class="product-images">
+          <div class="cube-container">
+            <div class="cube">
+              <div class="face front">
+                <img src="${product.thumbnail}" alt="${product.title}">
+              </div>
+              <div class="face back">
+                <img src="${product.images && product.images[0] ? product.images[0] : product.thumbnail}" alt="${product.title}">
+              </div>
+              <div class="face right">
+                <img src="${product.images && product.images[1] ? product.images[1] : product.thumbnail}" alt="${product.title}">
+              </div>
+              <div class="face left">
+                <img src="${product.images && product.images[2] ? product.images[2] : product.thumbnail}" alt="${product.title}">
+              </div>
+              <div class="face top">
+                <img src="${product.images && product.images[3] ? product.images[3] : product.thumbnail}" alt="${product.title}">
+              </div>
+              <div class="face bottom">
+                <img src="${product.images && product.images[4] ? product.images[4] : product.thumbnail}" alt="${product.title}">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-info">
+          <h1>${product.title}</h1>
+          <div class="rating">
+            <span class="stars">${"★".repeat(
+              Math.floor(product.rating || 0)
+            )}${"☆".repeat(5 - Math.floor(product.rating || 0))}</span>
+            <span>(${product.rating || 0})</span>
+          </div>
+          <div class="price">$${product.price}</div>
+          <div class="discount">${
+            product.discountPercentage
+              ? `Save ${product.discountPercentage}%`
+              : ""
+          }</div>
+          <p class="description">${product.description}</p>
+          <div class="product-details">
+            <h3>Product Details</h3>
+            <ul>
+              <li><strong>Brand:</strong> ${product.brand || "N/A"}</li>
+              <li><strong>Category:</strong> ${product.category || "N/A"}</li>
+              <li><strong>Stock:</strong> ${product.stock || 0} available</li>
+              <li><strong>SKU:</strong> ${product.sku || "N/A"}</li>
+            </ul>
+          </div>
+          <div class="quantity-selector">
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" value="1" min="1" max="${
+              product.stock || 1
+            }">
+          </div>
+          <div class="action-buttons">
+            <button class="add-to-cart-btn" onclick="addToCart(${
+              product.id
+            }, document.getElementById('quantity').value)">Add to Cart</button>
+            <button class="buy-now-btn">Buy Now</button>
+          </div>
+        </div>
+      </div>
+    `;
+
+          // إضافة وظيفة تغيير الصورة الرئيسية
+          const galleryImages = document.querySelectorAll(".image-gallery img");
+          const mainImage = document.querySelector(".main-image");
+          galleryImages.forEach((img) => {
+            img.addEventListener("click", () => {
+              mainImage.src = img.src;
+            });
+          });
+        } catch (err) {
+          productDetail.innerHTML =
+            "<p>Error loading product details. Please try again later.</p>";
+          console.error(err);
+        }
+      }
+
+      // 3️⃣ جلب التقييمات من API
+      async function fetchReviews(productId) {
+        try {
+          const res = await fetch(
+            `https://dummyjson.com/products/${productId}`
+          );
+          const product = await res.json();
+
+          // إنشاء تقييمات وهمية بناءً على التقييم العام
+          const reviewsContainer = document.getElementById("reviews-container");
+          const rating = Math.floor(product.rating || 4);
+          const reviews = generateMockReviews(rating);
+
+          reviewsContainer.innerHTML = reviews
+            .map(
+              (review) => `
+            <div class="review">
+              <div class="review-header">
+                <span class="reviewer-name">${review.name}</span>
+                <div class="review-rating">
+                  ${generateStars(review.rating)}
+                  <span class="review-date">${review.date}</span>
+                </div>
+              </div>
+              <p class="review-text">${review.comment}</p>
+            </div>
+          `
+            )
+            .join("");
+        } catch (err) {
+          console.error("Error fetching reviews:", err);
+        }
+      }
+
+      // 4️⃣ جلب المنتجات المقترحة
+      async function fetchRecommendedProducts(productId) {
+        try {
+          const res = await fetch(
+            `https://dummyjson.com/products/${productId}`
+          );
+          const currentProduct = await res.json();
+
+          // جلب منتجات من نفس الفئة
+          const categoryRes = await fetch(
+            `https://dummyjson.com/products/category/${currentProduct.category}?limit=4`
+          );
+          const categoryProducts = await categoryRes.json();
+
+          const recommendedContainer = document.getElementById(
+            "recommended-products"
+          );
+          recommendedContainer.innerHTML = categoryProducts.products
+            .filter((p) => p.id !== currentProduct.id)
+            .slice(0, 4)
+            .map(
+              (p) => `
+              <div class="product">
+                <img src="${p.thumbnail}" alt="${p.title}" loading="lazy">
+                <div class="rating">
+                  ${generateStars(p.rating || 4.5)}
+                  <span class="rating-text">(${
+                    Math.floor(Math.random() * 100) + 50
+                  })</span>
+                </div>
+                <h4>${p.title}</h4>
+                <a href="productsDetials.html?id=${
+                  p.id
+                }" class="view-details" title="View Details">
+                  <i class="fas fa-eye"></i>
+                </a>
+                <div class="price">$${p.price}</div>
+                <button onclick="addToCart(${p.id})">Add to Cart</button>
+              </div>
+            `
+            )
+            .join("");
+
+          // إضافة تأثير الظهور التدريجي
+          const products = recommendedContainer.querySelectorAll(".product");
+          products.forEach((product, i) => {
+            setTimeout(() => product.classList.add("show"), i * 100);
+          });
+        } catch (err) {
+          console.error("Error fetching recommended products:", err);
+        }
+      }
+
+      // 5️⃣ إنشاء تقييمات وهمية
+      function generateMockReviews(rating) {
+        const names = ["Ahmed", "Sara", "Mohamed", "Fatima", "Ali", "Noor"];
+        const comments = [
+          "Excellent product! Great quality and reasonable price.",
+          "Love the design and colors. Highly recommend!",
+          "Fast delivery and good packaging.",
+          "Product matches the description. Very satisfied with the purchase.",
+          "High quality and elegant. Will buy again.",
+          "Amazing! Great shopping experience.",
+        ];
+
+        return Array.from({ length: 6 }, (_, i) => ({
+          name: names[i % names.length],
+          rating: Math.max(3, Math.min(5, rating + (Math.random() - 0.5) * 2)),
+          comment: comments[i % comments.length],
+          date: new Date(
+            Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000
+          ).toLocaleDateString("en-US"),
+        }));
+      }
+
+      // 6️⃣ إنشاء النجوم للتقييم
+      function generateStars(rating) {
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating % 1 !== 0;
+        const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+        let stars = "";
+        for (let i = 0; i < fullStars; i++) {
+          stars += '<i class="fas fa-star"></i>';
+        }
+        if (hasHalfStar) {
+          stars += '<i class="fas fa-star-half-alt"></i>';
+        }
+        for (let i = 0; i < emptyStars; i++) {
+          stars += '<i class="far fa-star"></i>';
+        }
+        return stars;
+      }
+
+      // تشغيل الدوال عند فتح الصفحة
+      fetchProductDetail(productId);
+      fetchReviews(productId);
+      fetchRecommendedProducts(productId);
+    </script>
+  </body>
+</html>

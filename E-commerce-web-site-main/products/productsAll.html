@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Products - StyleShop</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <nav class="navbar">
+        <div class="nav-container">
+          <a href="../index.html" class="logo">halazStyle</a>
+
+          <div class="search-box">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search products..."
+            />
+            <button id="search-btn"><i class="fas fa-search"></i></button>
+          </div>
+
+          <div class="nav-icons">
+            <div class="cart-btn" id="cart-btn">
+              <i class="fas fa-shopping-cart"></i>
+              <span class="cart-count" id="cart-count">0</span>
+            </div>
+            <button class="menu-toggle" id="menu-toggle">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Cart Sidebar -->
+    <aside class="cart-sidebar" id="cart-sidebar">
+      <div class="cart-header">
+        <h2>Your Cart</h2>
+        <button class="close-cart" id="close-cart">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="cart-items" id="cart-items"></div>
+      <div class="cart-footer">
+        <p>Total: $<span id="cart-total">0.00</span></p>
+        <div class="cart-actions">
+          <button class="clear-cart" id="clear-cart">Clear</button>
+          <button class="checkout-btn">Checkout</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Filters Bar -->
+    <section class="filters-bar">
+      <div class="container">
+        <div class="filters-container">
+          <!-- زر التصنيفات -->
+          <div class="dropdown categories-box">
+            <a href="#" id="categories-btn" class="nav-link">Categories</a>
+            <ul id="categories-menu" class="dropdown-menu">
+              <li onclick="setCategoryFilter('all')">All Categories</li>
+            </ul>
+          </div>
+
+          <!-- فلاتر الترتيب -->
+          <div class="dropdown sort-box">
+            <button id="sort-btn" class="nav-link">Sort</button>
+            <ul id="sort-menu" class="dropdown-menu">
+              <li onclick="setSort('default')">Default</li>
+              <li onclick="setSort('price-low')">Price: Low to High</li>
+              <li onclick="setSort('price-high')">Price: High to Low</li>
+              <li onclick="setSort('rating')">Highest Rated</li>
+              <li onclick="setSort('newest')">Newest</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+      <h1>All Products</h1>
+
+      <section class="products">
+        <div id="all-products" class="product-list"></div>
+
+        <!-- Pagination -->
+        <div id="pagination" class="pagination"></div>
+      </section>
+    </main>
+
+    <!-- Back to Top -->
+    <button id="scrollToTopBtn" class="scrollToTopBtn">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section">
+          <h3>StyleShop</h3>
+          <p>Your one-stop destination for all fashion needs.</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="productsAll.html">Products</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contact Info</h3>
+          <ul>
+            <li><i class="fas fa-map-marker-alt"></i> 123 Fashion Street</li>
+            <li><i class="fas fa-phone"></i> +1 234 567 890</li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>Newsletter</h3>
+          <form class="newsletter-form">
+            <input type="email" placeholder="Your Email" />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> StyleShop. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Search Popup -->
+    <div id="search-popup" class="search-popup">
+      <div class="popup-content">
+        <span id="close-popup" class="close-btn">&times;</span>
+        <h3>Search Results</h3>
+        <div id="search-results"></div>
+      </div>
+    </div>
+
+    <script src="../main.js"></script>
+  </body>
+</html>
