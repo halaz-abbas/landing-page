@@ -58,6 +58,9 @@
             <button id="search-btn"><i class="fas fa-search"></i></button>
           </div>
           <div class="nav-icons">
+            <button class="search-toggle" id="search-toggle">
+              <i class="fas fa-search"></i>
+            </button>
             <div class="cart-btn" id="cart-btn">
               <i class="fas fa-shopping-cart"></i>
               <span class="cart-count" id="cart-count">0</span>
@@ -107,6 +110,9 @@
 
     <!-- Products -->
     <section class="products" id="products">
+      <button class="mobile-filter-toggle" id="mobile-filter-toggle">
+        <i class="fas fa-filter"></i> Filters
+      </button>
       <div class="products-container">
         <div class="category-sidebar">
           <h3>Categories</h3>
@@ -129,6 +135,29 @@
           <div class="product-list" id="home-products"></div>
           <div id="home-pagination" class="pagination"></div>
         </div>
+      </div>
+      <!-- Mobile Category Sidebar -->
+      <div class="mobile-category-sidebar" id="mobile-category-sidebar">
+        <div class="sidebar-header">
+          <h3>Filters</h3>
+          <button class="close-sidebar" id="close-sidebar">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <h3>Categories</h3>
+        <ul id="mobile-home-categories">
+          <li onclick="setHomeCategory('all')" class="active">
+            All Categories
+          </li>
+        </ul>
+        <h3>Sort By</h3>
+        <ul id="mobile-home-sort">
+          <li onclick="setHomeSort('default')" class="active">Default</li>
+          <li onclick="setHomeSort('price-low')">Price: Low to High</li>
+          <li onclick="setHomeSort('price-high')">Price: High to Low</li>
+          <li onclick="setHomeSort('rating')">Rating</li>
+          <li onclick="setHomeSort('newest')">Newest</li>
+        </ul>
       </div>
     </section>
 

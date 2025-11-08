@@ -561,6 +561,9 @@ async function setHomeCategory(category) {
   document
     .querySelectorAll("#home-categories li")
     .forEach((li) => li.classList.remove("active"));
+  document
+    .querySelectorAll("#mobile-home-categories li")
+    .forEach((li) => li.classList.remove("active"));
   event.target.classList.add("active");
   categoryTitle.textContent =
     category === "all"
@@ -598,8 +601,12 @@ function setHomeSort(sortType) {
   document
     .querySelectorAll("#home-sort li")
     .forEach((li) => li.classList.remove("active"));
+  document
+    .querySelectorAll("#mobile-home-sort li")
+    .forEach((li) => li.classList.remove("active"));
   event.target.classList.add("active");
   applyHomeFilters();
+  closeMobileSidebar();
 }
 
 function applyHomeFilters() {
@@ -655,6 +662,11 @@ async function loadHomeCategories() {
     const categories = await res.json();
     homeCategories.innerHTML =
       '<li onclick="setHomeCategory(\'all\')" class="active">All Categories</li>';
+    const mobileHomeCategories = document.getElementById(
+      "mobile-home-categories"
+    );
+    mobileHomeCategories.innerHTML =
+      '<li onclick="setHomeCategory(\'all\')" class="active">All Categories</li>';
 
     categories.forEach((cat) => {
       const name = cat.slug || cat.name || cat;
@@ -664,11 +676,42 @@ async function loadHomeCategories() {
           name.charAt(0).toUpperCase() + name.slice(1).replace("-", " ");
         li.onclick = () => setHomeCategory(name);
         homeCategories.appendChild(li);
+
+        const mobileLi = li.cloneNode(true);
+        mobileLi.onclick = () => {
+          setHomeCategory(name);
+          closeMobileSidebar();
+        };
+        mobileHomeCategories.appendChild(mobileLi);
       }
     });
   } catch (e) {
     console.error("Error loading home categories", e);
   }
+}
+
+// ===== Mobile Sidebar Functions =====
+const mobileFilterToggle = document.getElementById("mobile-filter-toggle");
+const mobileCategorySidebar = document.getElementById("mobile-category-sidebar");
+const closeSidebar = document.getElementById("close-sidebar");
+
+function closeMobileSidebar() {
+  mobileCategorySidebar.classList.remove("active");
+}
+
+if (mobileFilterToggle && mobileCategorySidebar) {
+  mobileFilterToggle.addEventListener("click", () => {
+    mobileCategorySidebar.classList.add("active");
+  });
+
+  closeSidebar.addEventListener("click", closeMobileSidebar);
+
+  // Close sidebar when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!mobileCategorySidebar.contains(e.target) && !mobileFilterToggle.contains(e.target)) {
+      closeMobileSidebar();
+    }
+  });
 }
 
 // ===== Initialize =====
@@ -723,6 +766,9 @@ const searchBox = document.querySelector(".search-box");
 if (searchToggle && searchBox) {
   searchToggle.addEventListener("click", () => {
     searchBox.classList.toggle("active");
+    if (searchBox.classList.contains("active")) {
+      searchInput.focus();
+    }
   });
 
   // Close search when clicking outside
