@@ -20,7 +20,12 @@
       <nav class="navbar">
         <div class="nav-container">
           <a href="../index.html" class="logo">halazStyle</a>
-
+          <nav class="nav-menu">
+            <ul>
+              <li><a href="../index.html">Home</a></li>
+              <li><a href="productsAll.html">Products</a></li>
+            </ul>
+          </nav>
           <div class="search-box">
             <input
               type="text"
@@ -29,6 +34,9 @@
             />
             <button id="search-btn"><i class="fas fa-search"></i></button>
           </div>
+          <button class="search-toggle" id="search-toggle">
+            <i class="fas fa-search"></i>
+          </button>
 
           <div class="nav-icons">
             <div class="cart-btn" id="cart-btn">
@@ -158,19 +166,39 @@
                 <img src="${product.thumbnail}" alt="${product.title}">
               </div>
               <div class="face back">
-                <img src="${product.images && product.images[0] ? product.images[0] : product.thumbnail}" alt="${product.title}">
+                <img src="${
+                  product.images && product.images[0]
+                    ? product.images[0]
+                    : product.thumbnail
+                }" alt="${product.title}">
               </div>
               <div class="face right">
-                <img src="${product.images && product.images[1] ? product.images[1] : product.thumbnail}" alt="${product.title}">
+                <img src="${
+                  product.images && product.images[1]
+                    ? product.images[1]
+                    : product.thumbnail
+                }" alt="${product.title}">
               </div>
               <div class="face left">
-                <img src="${product.images && product.images[2] ? product.images[2] : product.thumbnail}" alt="${product.title}">
+                <img src="${
+                  product.images && product.images[2]
+                    ? product.images[2]
+                    : product.thumbnail
+                }" alt="${product.title}">
               </div>
               <div class="face top">
-                <img src="${product.images && product.images[3] ? product.images[3] : product.thumbnail}" alt="${product.title}">
+                <img src="${
+                  product.images && product.images[3]
+                    ? product.images[3]
+                    : product.thumbnail
+                }" alt="${product.title}">
               </div>
               <div class="face bottom">
-                <img src="${product.images && product.images[4] ? product.images[4] : product.thumbnail}" alt="${product.title}">
+                <img src="${
+                  product.images && product.images[4]
+                    ? product.images[4]
+                    : product.thumbnail
+                }" alt="${product.title}">
               </div>
             </div>
           </div>

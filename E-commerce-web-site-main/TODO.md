@@ -1,8 +1,5 @@
-# TODO: Add Professional Features to E-commerce Site
-
-- [x] Add product rating system with stars and voting
-- [x] Enhance design with advanced CSS effects (blur, glassmorphism)
-- [x] Add advanced notification system for offers and new products
-- [x] Improve performance with lazy loading for images and optimized API calls
-- [ ] Add favorites feature with heart button for products
-- [x] Improve SEO with dynamic meta tags and descriptions
+- [x] Add nav-menu to productsAll.html
+- [x] Add nav-menu to productsDetials.html
+- [x] Update style.css to make nav-menu responsive on mobile
+- [x] Test the responsive navigation
+- [x] Make search box toggle on mobile only

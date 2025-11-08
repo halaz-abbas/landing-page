@@ -707,6 +707,30 @@ if (menuToggle && navMenu) {
       navMenu.classList.remove("active");
     }
   });
+
+  // Close menu when clicking on a link
+  navMenu.addEventListener("click", (e) => {
+    if (e.target.tagName === "A") {
+      navMenu.classList.remove("active");
+    }
+  });
+}
+
+// ===== Mobile Search Toggle =====
+const searchToggle = document.getElementById("search-toggle");
+const searchBox = document.querySelector(".search-box");
+
+if (searchToggle && searchBox) {
+  searchToggle.addEventListener("click", () => {
+    searchBox.classList.toggle("active");
+  });
+
+  // Close search when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!searchToggle.contains(e.target) && !searchBox.contains(e.target)) {
+      searchBox.classList.remove("active");
+    }
+  });
 }
 
 // ===== Touch Events for Mobile =====

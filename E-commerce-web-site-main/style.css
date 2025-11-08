@@ -666,6 +666,35 @@ body {
   background: #f5f5f5;
 }
 
+/* Mobile Menu */
+.nav-menu.active {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  z-index: 1000;
+}
+
+.nav-menu.active li {
+  margin-bottom: 10px;
+}
+
+.nav-menu.active li a {
+  display: block;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.nav-menu.active li a:hover {
+  background: none;
+  color: #e94560;
+}
+
 /* Categories Button */
 #categories-btn {
   font-weight: bold;
@@ -748,7 +777,7 @@ body {
   max-width: 1300px;
   margin: auto;
   padding: 10px 20px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 /* Logo */
@@ -774,6 +803,20 @@ body {
   background: #f5f5f5;
   border-radius: 25px;
   padding: 5px 15px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.search-box.active {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  z-index: 1000;
+  border-radius: 0 0 10px 10px;
 }
 .search-box input {
   border: none;
@@ -787,6 +830,30 @@ body {
   border: none;
   cursor: pointer;
   color: #777;
+}
+
+/* Search Toggle */
+.search-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  font-size: 20px;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.search-toggle:hover {
+  background: #f5f5f5;
+}
+
+/* Hide search toggle on desktop */
+@media (min-width: 993px) {
+  .search-toggle {
+    display: none !important;
+  }
 }
 
 /* Nav Icons */
@@ -824,6 +891,14 @@ body {
   cursor: pointer;
   background: none;
   border: none;
+  color: #333;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.menu-toggle:hover {
+  background: #f5f5f5;
 }
 
 /* === Cart Sidebar === */
@@ -1006,9 +1081,14 @@ body {
   .menu-toggle {
     display: block;
   }
+  .nav-menu {
+    display: none;
+  }
   .search-box {
-    min-width: 150px;
-    flex: 1;
+    display: none;
+  }
+  .search-toggle {
+    display: block;
   }
   .hero {
     height: 400px;
@@ -1042,24 +1122,18 @@ body {
 
 @media (max-width: 768px) {
   .nav-container {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
     gap: 10px;
     padding: 10px;
+    flex-wrap: wrap;
   }
   .nav-icons {
     gap: 10px;
   }
-  .search-box {
+  .search-box.active {
     width: 100%;
     max-width: none;
-    order: 2;
-  }
-  .logo {
-    order: 1;
-  }
-  .nav-icons {
-    order: 3;
   }
   .hero {
     height: 350px;
